@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermercado - Login y Registro</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="estilos.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -24,6 +24,14 @@
                         <i class="fas fa-lock"></i>
                         <input type="password" name="contraseña" placeholder="Contraseña" required>
                     </div>
+                    <div class="input-box">
+                    <label for="rol">Selecciona tu rol:</label>
+                    <select id="rol" name="rol" required>
+                        <option value="cliente">Cliente</option>
+                        <option value="empleado">Empleado</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
                     <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i> Ingresar</button>
                     <p>¿No tienes cuenta? <a href="#" id="switch-to-register">Regístrate</a></p>
                 </form>
@@ -54,6 +62,14 @@
         <i class="fas fa-lock"></i>
         <input type="password" name="contraseña" placeholder="contraseña" required>
     </div>
+    <div class="input-box">
+                    <label for="rol">Selecciona tu rol:</label>
+                    <select id="rol" name="rol" required>
+                        <option value="cliente">Cliente</option>
+                        <option value="empleado">Empleado</option>
+                        <option value="admin">Administrador</option>
+                    </select>
+                </div>
     <button type="submit" class="btn"><i class="fas fa-user-plus"></i> Registrarse</button>
     <p>¿Ya tienes cuenta? <a href="#" id="switch-to-login">Inicia sesión</a></p>
 </form>

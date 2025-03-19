@@ -8,12 +8,13 @@ $usuario = $_POST['usuario'];
 $correo = $_POST['correo'];
 $numero = $_POST['numero'];
 $contraseña = $_POST['contraseña'];
+$rol = $_POST['rol']; 
 
 
 $contraseña = hash('sha512', $contraseña); 
 
-$query = "INSERT INTO registro(documento, nombre, usuario, correo, numero, contraseña) 
-          VALUES('$documento','$nombre','$usuario','$correo','$numero','$contraseña')";
+$query = "INSERT INTO registro(documento, nombre, usuario, correo, numero, contraseña,rol) 
+          VALUES('$documento','$nombre','$usuario','$correo','$numero','$contraseña','$rol')";
 
 
 
