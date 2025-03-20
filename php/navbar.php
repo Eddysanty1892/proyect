@@ -1,58 +1,83 @@
 <?php
-session_start(); 
+
+if (session_status() == PHP_SESSION_NONE) {
+  session_start();
+}
 
 if (!isset($_SESSION['correo'])) {
-    echo '<script>alert("Error: No has iniciado sesión."); window.location.href="../index/index.php";</script>';
+    // Si no hay sesión activa, redirige al login
+    header("Location: ../index/index.php");
     exit();
 }
 
-include '../php/conexion_be.php'; 
+include '../php/conexion_be.php'; // Conexión a la base de datos
 
-$correo = $_SESSION['correo'];
+// Obtener los datos del usuario desde la base de datos usando el correo guardado en la sesión
+$correo = $_SESSION['correo']; // Correo del usuario desde la sesión
 $query = "SELECT * FROM registro WHERE correo='$correo'";
 $resultado = mysqli_query($conexion, $query);
 
 if ($resultado && mysqli_num_rows($resultado) > 0) {
-    $usuario = mysqli_fetch_assoc($resultado);
+    // Si la consulta es exitosa y el usuario existe, obtenemos los datos
+    $usuario = mysqli_fetch_assoc($resultado); // Almacenamos los datos en $usuario
 } else {
-    echo "<script>alert('Error: Usuario no encontrado.');</script>";
+    // Si no se encuentra el usuario, redirigimos
+    echo '<script>alert("Usuario no encontrado."); window.location.href="../index/index.php";</script>';
     exit();
 }
-?>
+// Verifica si la sesión ya está iniciada antes de llamar a session_start()
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
 
-<link rel="stylesheet" href="../css/nav.css">
+if (!isset($_SESSION['correo'])) {
+    echo '<script>alert("No has iniciado sesión."); window.location.href="../index/index.php";</script>';
+    exit();
+}
+
+$rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
+?>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="../index/bienvenida.php">Supermercado</a>
 
+        <!-- Menú Producto -->
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Producto
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../index/no_alcance.html">Ver Producto</a></li>
-                <li><a class="dropdown-item" href="#">Crear Producto</a></li>
+                <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
+                    <li><a class="dropdown-item" href="#">Crear Producto</a></li>
+                <?php endif; ?>
             </ul>
         </div>
 
+        <!-- Menú Categoría -->
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Categoría
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../index/categoria.php">Ver Categorías</a></li>
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearCategoriaModal">Crear Categoría</a></li>
+                <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
+                    <li><a class="dropdown-item" href="#">Crear Categoría</a></li>
+                <?php endif; ?>
             </ul>
         </div>
 
+        <!-- Menú Proveedor -->
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Proveedor
             </a>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../index/provedor.php">Ver Proveedores</a></li>
-                <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProvedorModal">Crear Provedor</a></li>
+                <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
+                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProvedorModal">Crear Proveedor</a></li>
+                <?php endif; ?>
             </ul>
         </div>
 
@@ -69,6 +94,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
         </div>
     </div>
 </nav>
+
 <!-- Modal para crear proveedor -->
 <div class="modal fade" id="crearProvedorModal" tabindex="-1" aria-labelledby="crearProvedorModalLabel" aria-hidden="true">
     <div class="modal-dialog">

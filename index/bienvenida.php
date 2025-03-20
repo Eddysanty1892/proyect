@@ -1,3 +1,16 @@
+<?php
+session_start();
+
+// Verificar si el usuario está autenticado
+if (!isset($_SESSION['correo'])) {
+    header("Location: ../index/index.php");  // Redirigir al login si no está autenticado
+    exit();
+}
+
+$rol = $_SESSION['rol'];
+
+?>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -23,23 +36,23 @@
                 <form id="perfilForm" action="../php/editar_perfil.php" method="POST">
                     <div class="mb-3">
                         <label class="form-label"><b>Documento:</b></label>
-                        <input type="text" class="form-control" value="<?= $usuario['documento'] ?>" readonly>
+                        <input type="text" class="form-control" value="<?= isset($usuario['documento']) ? $usuario['documento'] : ''; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><b>Correo:</b></label>
-                        <input type="email" class="form-control" value="<?= $usuario['correo'] ?>" readonly>
+                        <input type="email" class="form-control" value="<?= isset($usuario['correo']) ? $usuario['correo'] : ''; ?>" readonly>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><b>Usuario:</b></label>
-                        <input type="text" class="form-control editable" name="usuario" value="<?= $usuario['usuario'] ?>" disabled required>
+                        <input type="text" class="form-control editable" name="usuario" value="<?= isset($usuario['usuario']) ? $usuario['usuario'] : ''; ?>" disabled required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><b>Nombre:</b></label>
-                        <input type="text" class="form-control editable" name="nombre" value="<?= $usuario['nombre'] ?>" disabled required>
+                        <input type="text" class="form-control editable" name="nombre" value="<?= isset($usuario['nombre']) ? $usuario['nombre'] : ''; ?>" disabled required>
                     </div>
                     <div class="mb-3">
                         <label class="form-label"><b>Número:</b></label>
-                        <input type="text" class="form-control editable" name="numero" value="<?= $usuario['numero'] ?>" disabled required>
+                        <input type="text" class="form-control editable" name="numero" value="<?= isset($usuario['numero']) ? $usuario['numero'] : ''; ?>" disabled required>
                     </div>
                     <button type="button" id="editarBtn" class="btn btn-warning">Editar</button>
                     <button type="submit" id="guardarBtn" class="btn btn-success d-none">Guardar</button>
@@ -48,6 +61,7 @@
         </div>
     </div>
 </div>
+
 
 
 

@@ -265,3 +265,14 @@ body {
     justify-content: center; 
 }
 
+.btn-buy {
+    background-color: #28a745;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-buy:hover {
+    background-color: #218838;
+}
