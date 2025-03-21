@@ -1,18 +1,16 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Proveedores - Supermercado</title>
+    <title>Categorías - Supermercado</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="provedor.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> 
+    <link rel="stylesheet" href="productos.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-
-
 <body>
 <?php include '../php/navbar.php'; ?>
+
 <!-- Modal de Perfil -->
 <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -50,8 +48,8 @@
         </div>
     </div>
 </div>
-<?php include '../php/agregar_provedor.php'; ?>
 
+<?php include '../php/agregar_producto.php'; ?>
 <?php include '../php/footer.php'; ?>
 
 
@@ -71,9 +69,8 @@
         let campos = document.querySelectorAll('.editable');
         campos.forEach(campo => campo.removeAttribute('disabled')); 
         document.getElementById('guardarBtn').classList.remove('d-none'); 
-        this.classList.add('d-none'); 
+        this.classList.add('d-none');
     });
 </script>
-
 </body>
 </html>

@@ -1,0 +1,27 @@
+/* document.addEventListener("DOMContentLoaded", function () {
+    document.querySelectorAll(".btn-delete").forEach(button => {
+        button.addEventListener("click", function () {
+            let id = this.getAttribute("data-id");
+
+            if (!id) {
+                alert("Error: No se recibió el ID del producto.");
+                return;
+            }
+
+            if (confirm("¿Estás seguro de que quieres eliminar este producto?")) {
+                fetch("../php/eliminar_producto.php", {
+                    method: "POST",
+                    body: new URLSearchParams({ id: id }),
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" }
+                })
+                .then(response => response.text())
+                .then(data => {
+                    alert(data);
+                    location.reload();
+                })
+                .catch(error => console.error("Error:", error));
+            }
+        });
+    });
+});
+*/

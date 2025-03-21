@@ -7,23 +7,21 @@ $resultado = mysqli_query($conexion, $query);
 
 <script src="../js/editar_categoria.js"></script>
 <script src="../js/eliminar_categoria.js"></script> 
-
-<link rel="stylesheet" href="categorias.css">
+<link rel="stylesheet" href="categoria.css">
 <div class="table-container">
-    <h2 class="table-title">Lista de Proveedores</h2>
+    <h2 class="table-title">Lista de Ctegorias</h2>
     <table class="custom-table">
         <thead>
             <tr>
                 <th>ID</th>
                 <th>Imagen</th>
-                <th>nombre</th>
-                <th>tipo</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
                 <th>Correo</th>
                 <th>Acciones</th> 
             </tr>
         </thead>
         <tbody>
-            
             <?php
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 echo "<tr id='fila-" . $fila['id'] . "'>"; 
@@ -32,22 +30,31 @@ $resultado = mysqli_query($conexion, $query);
                 echo "<td>" . $fila['nombre_categoria'] . "</td>";
                 echo "<td>" . $fila['tipo'] . "</td>";
                 echo "<td>" . $fila['correo'] . "</td>";
-                echo "<td class='acciones'>
-                    <button class='btn-edit' data-bs-toggle='modal' data-bs-target='#editarCategoriaModal' 
+                echo "<td class='acciones'>";
+
+                if ($rol === 'Comprador') {
+                    // Si el usuario es Comprador, solo mostrar el botón "Comparar"
+                    echo "<button class='btn-compare'>Comparar</button>";
+                } else {
+                    // Si el usuario es Administrador o Vendedor, mostrar Editar y Eliminar
+                    echo "<button class='btn-edit' data-bs-toggle='modal' data-bs-target='#editarCategoriaModal' 
                         data-id='" . $fila['id'] . "' 
                         data-nombre='" . $fila['nombre_categoria'] . "' 
                         data-descripcion='" . $fila['tipo'] . "' 
                         data-correo='" . $fila['correo'] . "' 
-                        data-imagen='../imagenes_categoria/" . $fila['imagen_categoria'] . "'>Editar</button>
-                    <button class='btn-delete' data-id='" . $fila['id'] . "'>Eliminar</button> <!-- Botón de eliminar -->
-                </td>";
+                        data-imagen='../imagenes_categoria/" . $fila['imagen_categoria'] . "'>Editar</button>";
+
+                    echo "<button class='btn-delete' data-id='" . $fila['id'] . "'>Eliminar</button>"; 
+                }
+
+                echo "</td>";
                 echo "</tr>";
             }
             ?>
-            
         </tbody>
     </table>
 </div>
+
 <!-- Modal para editar categoria -->
 <div class="modal fade" id="editarCategoriaModal" tabindex="-1" aria-labelledby="editarCategoriaModalLabel" aria-hidden="true">
     <div class="modal-dialog">

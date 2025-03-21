@@ -19,7 +19,7 @@ if(mysqli_num_rows($validar_login) > 0){
     } elseif ($usuario['rol'] === 'Vendedor') {
         header("Location: ../index/bienvenida.php");  // Redirige a la página para vendedores
     } else {
-        header("Location: ../index/index.php");  // Redirige a la página para compradores
+        header("Location: ../index/bienvenida.php");  // Redirige a la página para compradores
     }
     exit();
 } else {

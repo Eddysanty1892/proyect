@@ -37,25 +37,25 @@ if (!isset($_SESSION['correo'])) {
 
 $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
 ?>
-
+<link rel="stylesheet" href="../css/nav.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="../index/bienvenida.php">Supermercado</a>
 
-        <!-- Menú Producto -->
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Producto
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../index/no_alcance.html">Ver Producto</a></li>
+                <li><a class="dropdown-item" href="../index/producto.php">Ver Producto</a></li>
                 <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
-                    <li><a class="dropdown-item" href="#">Crear Producto</a></li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProductoModal">Crear Producto</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
 
-        <!-- Menú Categoría -->
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Categoría
@@ -63,23 +63,26 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="../index/categoria.php">Ver Categorías</a></li>
                 <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
-                    <li><a class="dropdown-item" href="#">Crear Categoría</a></li>
+                    <li>
+                        <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearCategoriaModal">Crear Categoría</a>
+                    </li>
                 <?php endif; ?>
             </ul>
         </div>
 
-        <!-- Menú Proveedor -->
-        <div class="dropdown">
-            <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-                Proveedor
-            </a>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../index/provedor.php">Ver Proveedores</a></li>
-                <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
-                    <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProvedorModal">Crear Proveedor</a></li>
-                <?php endif; ?>
-            </ul>
-        </div>
+        <?php if ($rol !== 'Comprador'): ?> 
+            <div class="dropdown">
+                <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                    Proveedor
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="../index/provedor.php">Ver Proveedores</a></li>
+                    <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
+                        <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProvedorModal">Crear Proveedor</a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+        <?php endif; ?> 
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
@@ -88,7 +91,15 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#perfilModal">Ver Perfil</button>
+                    <span class="navbar-text text-white" style="margin-right: 20px; margin-top: 5px; display: inline-block;">
+                        <?= isset($rol) ? $rol : 'Sin Rol'; ?>
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#perfilModal">Ver Perfil</button>
+                </li>
+                <li class="nav-item">
+                    <a href="../php/logout.php" class="btn btn-danger">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -129,26 +140,61 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="crearCategoriaModalLabel">Crear Proveedor</h5>
+          <h5 class="modal-title" id="crearCategoriaModalLabel">Crear Categoría</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
           <form action="../php/categoria_base.php" method="POST" enctype="multipart/form-data">
             <div class="modal-footer">
-              <input type="text" class="form-control mb-4" name="nombre_categoria" placeholder="Nombre de categoria" required>
-              <input type="text" style="height: 90px;" class="form-control mb-4" name="tipo" placeholder="tipo" required>
+              <input type="text" class="form-control mb-4" name="nombre_categoria" placeholder="Nombre de categoría" required>
+              <input type="text" style="height: 90px;" class="form-control mb-4" name="tipo" placeholder="Tipo" required>
               <input type="email" class="form-control mb-4" name="correo" placeholder="Correo" required>
-              
+
               <div class="mb-3">
-                <label class="form-label">Imagen de categoria:</label>
+                <label class="form-label">Imagen de Categoría:</label>
                 <input type="file" class="form-control" name="imagen_categoria" required>
               </div>
               
-              <button type="submit" class="boton">Guardar</button>
+              <button type="submit" class="btn btn-success">Guardar</button>
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
             </div>
           </form>
         </div>
       </div>
+    </div>
+</div>
+<!-- Modal para agregar producto -->
+<div class="modal fade" id="crearProductoModal" tabindex="-1" aria-labelledby="crearProductoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="crearProductoModalLabel">Agregar Producto</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="../php/producto_be.php" method="POST" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        
+                        <input type="text" class="form-control" name="nombre_producto" placeholder="Nombre del producto" required>
+                    </div>
+                    <div class="mb-3">
+                       
+                        <textarea class="form-control" name="descripcion" placeholder="Descripción del producto" required style="height: 90px;"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        
+                        <input type="number" class="form-control" name="precio" placeholder="Precio" step="0.01" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Imagen del Producto:</label>
+                        <input type="file" class="form-control" name="imagen" accept="image/*" required>
+                    </div>
+                    
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

@@ -1,0 +1,32 @@
+/* document.addEventListener("DOMContentLoaded", function() {
+    document.querySelectorAll(".btn-edit").forEach(button => {
+        button.addEventListener("click", function() {
+            let id = this.getAttribute("data-id");
+            let nombre = this.getAttribute("data-nombre");
+            let descripcion = this.getAttribute("data-descripcion");
+            let precio = this.getAttribute("data-precio");
+            let imagenSrc = this.getAttribute("data-imagen");
+
+            document.getElementById("edit-id").value = id;
+            document.getElementById("edit-nombre").value = nombre;
+            document.getElementById("edit-descripcion").value = descripcion;
+            document.getElementById("edit-precio").value = precio;
+
+           
+            let imagenPreview = document.getElementById("edit-imagen-preview");
+            if (imagenSrc && imagenSrc !== "../imagenes_productos/") {
+                imagenPreview.src = imagenSrc;
+                imagenPreview.classList.remove("d-none");
+            } else {
+                imagenPreview.classList.add("d-none");
+            }
+
+            console.log("ID:", id);
+            console.log("Nombre:", nombre);
+            console.log("Descripción:", descripcion);
+            console.log("Precio:", precio);
+            console.log("Imagen:", imagenSrc);
+        });
+    });
+});
+*/

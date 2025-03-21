@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, #ee3137, #e2a595);
+    background: linear-gradient(to right, #eb74ef, #dba2e3);
 }
 .category-card {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -275,4 +275,16 @@ body {
 
 .btn-buy:hover {
     background-color: #218838;
+}
+.btn-compare {
+    background-color: #ff4800;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-compare:hover {
+    background-color: #e99e7b;
 }
