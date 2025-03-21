@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-03-2025 a las 03:26:28
+-- Tiempo de generación: 21-03-2025 a las 03:38:56
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -43,6 +43,19 @@ INSERT INTO `categorias` (`id`, `nombre_categoria`, `tipo`, `correo`, `imagen_ca
 (2, 'mesas', 'hogars', 'mesa@gamil.coms', 'categoria_67d4ef772c40e.jpeg'),
 (5, 'vegetales', 'comida', 'comida@gmail.com', 'categoria_67dca96b1b01a.jpg'),
 (6, 'vegetales', 'ASA', 'AAA@GMAIL.COM', 'categoria_67dcbfb4962e8.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `detalle_ventas`
+--
+
+CREATE TABLE `detalle_ventas` (
+  `id` int(11) NOT NULL,
+  `venta_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL,
+  `cantidad` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 -- --------------------------------------------------------
 
@@ -133,6 +146,19 @@ INSERT INTO `registro` (`id`, `documento`, `nombre`, `usuario`, `correo`, `numer
 (15, '4342343', 'malo', 'malo', 'malo@gmail.com', '321312321', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 'Administrador'),
 (16, '543543', 'eddy', 'eddy', 'eddy@gmail.com', '1231232', '3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1eb8b85103e3be7ba613b31bb5c9c36214dc9f14a42fd7a2fdb84856bca5c44c2', 'Vendedor');
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ventas`
+--
+
+CREATE TABLE `ventas` (
+  `id` int(11) NOT NULL,
+  `registro_id` int(11) NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
+  `total` decimal(10,2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
 --
 -- Índices para tablas volcadas
 --
@@ -142,6 +168,14 @@ INSERT INTO `registro` (`id`, `documento`, `nombre`, `usuario`, `correo`, `numer
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `venta_id` (`venta_id`),
+  ADD KEY `producto_id` (`producto_id`);
 
 --
 -- Indices de la tabla `inventario`
@@ -170,6 +204,13 @@ ALTER TABLE `registro`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `registro_id` (`registro_id`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -178,6 +219,12 @@ ALTER TABLE `registro`
 --
 ALTER TABLE `categorias`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `inventario`
@@ -204,14 +251,33 @@ ALTER TABLE `registro`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
+-- AUTO_INCREMENT de la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `detalle_ventas`
+--
+ALTER TABLE `detalle_ventas`
+  ADD CONSTRAINT `detalle_ventas_ibfk_1` FOREIGN KEY (`venta_id`) REFERENCES `ventas` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `detalle_ventas_ibfk_2` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
 
 --
 -- Filtros para la tabla `inventario`
 --
 ALTER TABLE `inventario`
   ADD CONSTRAINT `inventario_ibfk_1` FOREIGN KEY (`producto_id`) REFERENCES `productos` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `ventas`
+--
+ALTER TABLE `ventas`
+  ADD CONSTRAINT `ventas_ibfk_1` FOREIGN KEY (`registro_id`) REFERENCES `registro` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
