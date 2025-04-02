@@ -1,6 +1,5 @@
 <?php
-/*
-include 'conexion_be.php';
+include '../config/conexion_be.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<pre>";
@@ -26,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultado = mysqli_query($conexion, $query);
 
     if ($resultado) {
-        echo "<script>alert('Producto actualizado con éxito'); window.location.href='../index/producto.php';</script>";
+        echo "<script>alert('Producto actualizado con éxito'); window.location.href='../vista/producto.php';</script>";
     } else {
         echo "<script>alert('Error al actualizar el producto'); window.history.back();</script>";
     }

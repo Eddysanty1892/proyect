@@ -1,5 +1,5 @@
 <?php
-include 'conexion_be.php';
+include '../config/conexion_be.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if (!empty($_FILES['imagen_categoria']['name'])) {
         $imagen = $_FILES['imagen_categoria']['name'];
-        $ruta = "../imagenes_categoria/" . $imagen;
+        $ruta = "../publico/imagenes_categoria/" . $imagen;
         move_uploaded_file($_FILES['imagen_categoria']['tmp_name'], $ruta);
        
         $query = "UPDATE categorias SET nombre_categoria='$nombre_categ', tipo='$tipo', correo='$correo', imagen_categoria='$imagen' WHERE id=$id";
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultado = mysqli_query($conexion, $query);
 
     if ($resultado) {
-        echo "<script>alert('Categoría actualizada con éxito'); window.location.href='../index/categoria.php';</script>";
+        echo "<script>alert('Categoría actualizada con éxito'); window.location.href='../vista/categoria.php';</script>";
     } else {
         echo "<script>alert('Error al actualizar categoría'); window.history.back();</script>";
     }

@@ -5,8 +5,8 @@ $query = "SELECT * FROM categorias";
 $resultado = mysqli_query($conexion, $query);
 ?>
 
-<script src="../js/editar_categoria.js"></script>
-<script src="../js/eliminar_categoria.js"></script> 
+<script src="../publico/js/editar_categoria.js"></script>
+<script src="../publico/js/eliminar_categoria.js"></script> 
 <link rel="stylesheet" href="../publico/css/categoria.css">
 <div class="table-container">
     <h2 class="table-title">Lista de Ctegorias</h2>
@@ -26,7 +26,7 @@ $resultado = mysqli_query($conexion, $query);
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 echo "<tr id='fila-" . $fila['id'] . "'>"; 
                 echo "<td>" . $fila['id'] . "</td>";
-                echo "<td><img src='../imagenes_categoria/" . $fila['imagen_categoria'] . "' alt='Proveedor' width='50'></td>";
+                echo "<td><img src='../publico/imagenes_categoria/" . $fila['imagen_categoria'] . "' alt='Proveedor' width='50'></td>";
                 echo "<td>" . $fila['nombre_categoria'] . "</td>";
                 echo "<td>" . $fila['tipo'] . "</td>";
                 echo "<td>" . $fila['correo'] . "</td>";
@@ -42,7 +42,7 @@ $resultado = mysqli_query($conexion, $query);
                         data-nombre='" . $fila['nombre_categoria'] . "' 
                         data-descripcion='" . $fila['tipo'] . "' 
                         data-correo='" . $fila['correo'] . "' 
-                        data-imagen='../imagenes_categoria/" . $fila['imagen_categoria'] . "'>Editar</button>";
+                        data-imagen='../publico/imagenes_categoria/" . $fila['imagen_categoria'] . "'>Editar</button>";
 
                     echo "<button class='btn-delete' data-id='" . $fila['id'] . "'>Eliminar</button>"; 
                 }

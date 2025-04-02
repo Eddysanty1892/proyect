@@ -1,5 +1,5 @@
 <?php
-include '../php/conexion_be.php'; // Corrección de "nclude"
+include '../config/conexion_be.php'; // Corrección de "nclude"
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validación de datos
@@ -18,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($_FILES['imagen']['error'] !== 0) {
             echo '<script>
                 alert("Error al subir la imagen.");
-                window.location = "../index/producto.php";
+                window.location = "../vista/producto.php";
             </script>';
             exit();
         }
 
         // Carpeta donde se guardarán las imágenes
-        $directorio = "../imagenes_productos/";
+        $directorio = "../publico/imagenes_productos/";
         if (!is_dir($directorio)) {
             mkdir($directorio, 0777, true);
         }
@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!in_array($imagen_extension, $extensiones_permitidas)) {
             echo '<script>
                 alert("Formato de imagen no permitido. Solo JPG, JPEG, PNG y GIF.");
-                window.location = "../index/producto.php";
+                window.location = "../vista/producto.php";
             </script>';
             exit();
         }
@@ -49,7 +49,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!move_uploaded_file($_FILES["imagen"]["tmp_name"], $ruta_final)) {
             echo '<script>
                 alert("Error al guardar la imagen en el servidor.");
-                window.location = "../index/producto.php";
+                window.location = "../vista/producto.php";
             </script>';
             exit();
         }
@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (mysqli_query($conexion, $query)) {
             echo '<script>
                 alert("Producto almacenado exitosamente");
-                window.location = "../index/producto.php";
+                window.location = "../vista/producto.php";
             </script>';
         } else {
             echo "Error en la consulta: " . mysqli_error($conexion);
@@ -69,13 +69,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         echo '<script>
             alert("Todos los campos son obligatorios.");
-            window.location = "../index/producto.php";
+            window.location = "../vista/producto.php";
         </script>';
     }
 } else {
     echo '<script>
         alert("Acceso no permitido.");
-        window.location = "../index/producto.php";
+        window.location = "../vista/producto.php";
     </script>';
 }
 ?>

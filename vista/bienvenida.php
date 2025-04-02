@@ -3,7 +3,7 @@ session_start();
 
 // Verificar si el usuario está autenticado
 if (!isset($_SESSION['correo'])) {
-    header("Location: ../index/index.php");  // Redirigir al login si no está autenticado
+    header("Location: ../vista/index.php");  // Redirigir al login si no está autenticado
     exit();
 }
 

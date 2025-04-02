@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let proveedorId = this.getAttribute("data-id");
 
             if (confirm("¿Estás seguro de que deseas eliminar esta categoria?")) {
-                fetch("../php/eliminar_categoria.php", {
+                fetch("../modelos/eliminar_categoria.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: "id=" + proveedorId

@@ -31,7 +31,7 @@ if (session_status() == PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['correo'])) {
-    echo '<script>alert("No has iniciado sesión."); window.location.href="../index/index.php";</script>';
+    echo '<script>alert("No has iniciado sesión."); window.location.href="../vista/index.php";</script>';
     exit();
 }
 

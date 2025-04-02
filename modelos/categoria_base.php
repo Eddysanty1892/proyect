@@ -1,5 +1,5 @@
 <?php
-include '../php/conexion_be.php';
+include '../config/conexion_be.php';
 
 
 $nombre_categoria = $_POST['nombre_categoria'];
@@ -13,7 +13,7 @@ $result = mysqli_query($conexion, $check_query);
 if (mysqli_num_rows($result) > 0) {
     echo '<script>
         alert("Error: Este correo ya está registrado. Usa otro correo.");
-        window.location = "../index/categoria.php";
+        window.location = "../vista/categoria.php";
     </script>';
     exit();
 }
@@ -22,12 +22,12 @@ if (mysqli_num_rows($result) > 0) {
 if (!isset($_FILES['imagen_categoria']) || $_FILES['imagen_categoria']['error'] != 0) {
     echo '<script>
         alert("Error al subir la imagen");
-        window.location = "../index/categoria.php";
+        window.location = "../vista/categoria.php";
     </script>';
     exit();
 }
 
-$directorio = "../imagenes_categoria/";  
+$directorio = "../publico/imagenes_categoria/";  
 if (!is_dir($directorio)) {
     mkdir($directorio, 0777, true);  
 }
@@ -42,7 +42,7 @@ $extensiones_permitidas = ["jpg", "jpeg", "png", "gif"];
 if (!in_array($imagen_extension, $extensiones_permitidas)) {
     echo '<script>
         alert("Formato de imagen no permitido. Solo JPG, JPEG, PNG y GIF.");
-        window.location = "../index/categoria.php";
+        window.location = "../vista/categoria.php";
     </script>';
     exit();
 }
@@ -50,7 +50,7 @@ if (!in_array($imagen_extension, $extensiones_permitidas)) {
 if (!move_uploaded_file($_FILES["imagen_categoria"]["tmp_name"], $ruta_final)) {
     echo '<script>
         alert("Error al guardar la imagen en el servidor.");
-        window.location = "../index/categoria.php";
+        window.location = "../vista/categoria.php";
     </script>';
     exit();
 }
@@ -63,7 +63,7 @@ $ejecutar = mysqli_query($conexion, $query);
 if ($ejecutar) {
     echo '<script>
         alert("Proveedor almacenado exitosamente");
-        window.location = "../index/categoria.php";
+        window.location = "../vista/categoria.php";
     </script>';
 } else {
     echo "Error en la consulta: " . mysqli_error($conexion);

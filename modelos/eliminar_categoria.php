@@ -1,5 +1,5 @@
 <?php
-include 'conexion_be.php'; 
+include '../config/conexion_be.php'; 
 
 if (isset($_POST['id'])) {
     $id = $_POST['id'];

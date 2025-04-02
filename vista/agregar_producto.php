@@ -10,8 +10,8 @@ $query = "SELECT * FROM productos";
 $resultado = mysqli_query($conexion, $query);
 ?>
 
-<script src="../js/editar_producto.js"></script>
-<script src="../js/eliminar_producto.js"></script> 
+<script src="../publico/js/editar_producto.js"></script>
+<script src="../publico/js/eliminar_producto.js"></script> 
 <link rel="stylesheet" href="producto.css">
 <div class="table-container">
     <h2 class="table-title">Lista de Productos</h2>
@@ -31,7 +31,7 @@ $resultado = mysqli_query($conexion, $query);
 while ($fila = mysqli_fetch_assoc($resultado)) {
     echo "<tr id='fila-" . $fila['id'] . "'>"; 
     echo "<td>" . $fila['id'] . "</td>";
-    echo "<td><img src='../imagenes_productos/" . $fila['imagen'] . "' alt='Producto' width='50'></td>";
+    echo "<td><img src='../publico/imagenes_productos/" . $fila['imagen'] . "' alt='Producto' width='50'></td>";
     echo "<td>" . htmlspecialchars($fila['nombre_producto']) . "</td>";
     echo "<td>" . htmlspecialchars($fila['descripcion']) . "</td>";
     echo "<td>" . $fila['precio'] . "</td>";
@@ -47,7 +47,7 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
     data-nombre='" . htmlspecialchars($fila['nombre_producto']) . "' 
     data-descripcion='" . htmlspecialchars($fila['descripcion']) . "' 
     data-precio='" . $fila['precio'] . "' 
-    data-imagen='../imagenes_productos/" . $fila['imagen'] . "'>
+    data-imagen='../publico/imagenes_productos/" . $fila['imagen'] . "'>
     Editar
 </button>";
 ;
@@ -73,7 +73,7 @@ echo "<button class='btn-delete' data-id='" . $fila['id'] . "'>Eliminar</button>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-            <form id="editarProductoForm" action="../php/editar_producto.php" method="POST" enctype="multipart/form-data">
+            <form id="editarProductoForm" action="../modelos/editar_producto.php" method="POST" enctype="multipart/form-data">
             <input type="hidden" id="edit-id" name="id">
 
 
