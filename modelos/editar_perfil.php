@@ -1,6 +1,6 @@
 <?php
 session_start();
-include 'conexion_be.php'; 
+include '../config/conexion_be.php'; 
 
 if (!isset($_SESSION['correo'])) {
     echo '<script>alert("Error: No has iniciado sesión."); window.location.href="../index/index.php";</script>';
@@ -16,9 +16,9 @@ $query = "UPDATE registro SET usuario='$usuario', nombre='$nombre', numero='$num
 $resultado = mysqli_query($conexion, $query);
 
 if ($resultado) {
-    echo '<script>alert("Perfil actualizado correctamente."); window.location.href="../index/bienvenida.php";</script>';
+    echo '<script>alert("Perfil actualizado correctamente."); window.location.href="../vista/bienvenida.php";</script>';
 } else {
-    echo '<script>alert("Error al actualizar el perfil."); window.location.href="../index/bienvenida.php";</script>';
+    echo '<script>alert("Error al actualizar el perfil."); window.location.href="../vista/bienvenida.php";</script>';
 }
 
 mysqli_close($conexion);

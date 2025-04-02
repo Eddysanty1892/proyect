@@ -1,14 +1,14 @@
 <?php
-include '../php/conexion_be.php'; 
+include '../config/conexion_be.php'; 
 
 $query = "SELECT * FROM proveedores"; 
 $resultado = mysqli_query($conexion, $query);
 ?>
 
-<script src="../js/editar_proveedor.js"></script>
-<script src="../js/eliminar_proveedor.js"></script>
+<script src="../publico/js/editar_proveedor.js"></script>
+<script src="../publico/js/eliminar_proveedor.js"></script>
 
-<link rel="stylesheet" href="provedor.css">
+<link rel="stylesheet" href="../publico/provedor.css">
 <div class="table-container">
     <h2 class="table-title">Lista de Proveedores</h2>
     <table class="custom-table">
@@ -29,7 +29,7 @@ $resultado = mysqli_query($conexion, $query);
             while ($fila = mysqli_fetch_assoc($resultado)) {
                 echo "<tr id='fila-" . $fila['id'] . "'>"; 
                 echo "<td>" . $fila['id'] . "</td>";
-                echo "<td><img src='../imagenes_provedores/" . $fila['imagen_provedor'] . "' alt='Proveedor' width='50'></td>";
+                echo "<td><img src='../publico/imagenes_provedores/" . $fila['imagen_provedor'] . "' alt='Proveedor' width='50'></td>";
                 echo "<td>" . $fila['nombre_provedor'] . "</td>";
                 echo "<td>" . $fila['descripcion'] . "</td>";
                 echo "<td>" . $fila['correo'] . "</td>";
@@ -41,7 +41,7 @@ $resultado = mysqli_query($conexion, $query);
                         data-descripcion='" . $fila['descripcion'] . "' 
                         data-correo='" . $fila['correo'] . "' 
                         data-contacto='" . $fila['contacto'] . "' 
-                        data-imagen='../imagenes_provedores/" . $fila['imagen_provedor'] . "'>Editar</button>
+                        data-imagen='../publico/imagenes_provedores/" . $fila['imagen_provedor'] . "'>Editar</button>
                     <button class='btn-delete' data-id='" . $fila['id'] . "'>Eliminar</button> <!-- Botón de eliminar -->
                 </td>";
                 echo "</tr>";
@@ -60,7 +60,7 @@ $resultado = mysqli_query($conexion, $query);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editarProveedorForm" action="../php/editar_proveedor.php" method="POST" enctype="multipart/form-data">
+                <form id="editarProveedorForm" action="../modelos/editar_proveedor.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="edit-id" name="id"> 
 
                     <input type="text" class="form-control mb-4" id="edit-nombre" name="nombre_provedor" placeholder="Nombre del proveedor" required>

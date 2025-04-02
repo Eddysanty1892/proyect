@@ -1,5 +1,5 @@
 <?php
-include '../php/conexion_be.php'; 
+include '../config/conexion_be.php'; 
 
 $query = "SELECT * FROM categorias"; 
 $resultado = mysqli_query($conexion, $query);
@@ -7,7 +7,7 @@ $resultado = mysqli_query($conexion, $query);
 
 <script src="../js/editar_categoria.js"></script>
 <script src="../js/eliminar_categoria.js"></script> 
-<link rel="stylesheet" href="categoria.css">
+<link rel="stylesheet" href="../publico/css/categoria.css">
 <div class="table-container">
     <h2 class="table-title">Lista de Ctegorias</h2>
     <table class="custom-table">
@@ -64,7 +64,7 @@ $resultado = mysqli_query($conexion, $query);
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form id="editarCategoriaForm" action="../php/editar_categoria.php" method="POST" enctype="multipart/form-data">
+                <form id="editarCategoriaForm" action="../modelos/editar_categoria.php" method="POST" enctype="multipart/form-data">
                     <input type="hidden" id="edit-id" name="id"> 
 
                     <input type="text" class="form-control mb-4" id="edit-nombre" name="nombre_categoria" placeholder="Nombre del categoria" required>

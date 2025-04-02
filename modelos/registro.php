@@ -1,5 +1,5 @@
 <?php
-include '../php/conexion_be.php';
+include '../config/conexion_be.php';
 
 $documento = $_POST['documento'];
 $nombre = $_POST['nombre'];
@@ -36,7 +36,7 @@ if ($ejecutar) {
     echo '
     <script>
         alert("Usuario registrado exitosamente");
-        window.location = "../index/index.php";
+        window.location = "../vista/index.php";
     </script>
     ';
     exit();
@@ -44,7 +44,7 @@ if ($ejecutar) {
     echo '
     <script>
         alert("Inténtalo de nuevo, usuario no registrado");
-        window.location = "../index/index.php";
+        window.location = "../vista/index.php";
     </script>
     ';
 }

@@ -1,5 +1,5 @@
 <?php
-include 'conexion_be.php';
+include '../config/conexion_be.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     echo "<pre>";
@@ -15,7 +15,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($nombre_proveedor) || empty($contacto) || empty($telefono) || empty($email)) {
         die('<script>
             alert("Todos los campos son obligatorios");
-            window.location = "../bienvenida.php";
+            window.location = "../vista/bienvenida.php";
         </script>');
     }
 
@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($ejecutar) {
         echo '<script>
             alert("Proveedor registrado exitosamente");
-            window.location = "../bienvenida.php";
+            window.location = "../vista/bienvenida.php";
         </script>';
     } else {
         echo '<script>

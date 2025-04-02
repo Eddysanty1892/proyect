@@ -1,6 +1,6 @@
 <?php
 session_start();
-include '../php/conexion_be.php'; 
+include '../config/conexion_be.php'; 
 
 $correo = $_POST['correo'];
 $contraseña = hash('sha512', $_POST['contraseña']); // Asegúrate de hacer hash de la contraseña para compararla con la base de datos
@@ -15,18 +15,18 @@ if(mysqli_num_rows($validar_login) > 0){
     
     // Redirigir según el rol
     if ($usuario['rol'] === 'Administrador') {
-        header("Location: ../index/bienvenida.php");  // Redirige a la página para administradores
+        header("Location: ../vista/bienvenida.php");  // Redirige a la página para administradores
     } elseif ($usuario['rol'] === 'Vendedor') {
-        header("Location: ../index/bienvenida.php");  // Redirige a la página para vendedores
+        header("Location: ../vista/bienvenida.php");  // Redirige a la página para vendedores
     } else {
-        header("Location: ../index/bienvenida.php");  // Redirige a la página para compradores
+        header("Location: ../vista/bienvenida.php");  // Redirige a la página para compradores
     }
     exit();
 } else {
     echo '
     <script>
     alert("Usuario no existe, verifique los datos");
-    window.location = "../index/index.php";
+    window.location = "../vista/index.php";
     </script>
     ';
     exit();

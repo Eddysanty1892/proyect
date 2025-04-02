@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function() {
             let proveedorId = this.getAttribute("data-id");
 
             if (confirm("¿Estás seguro de que deseas eliminar este proveedor?")) {
-                fetch("../php/eliminar_proveedor.php", {
+                fetch("../modelos/eliminar_proveedor.php", {
                     method: "POST",
                     headers: { "Content-Type": "application/x-www-form-urlencoded" },
                     body: "id=" + proveedorId

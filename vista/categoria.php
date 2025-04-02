@@ -6,11 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categorías - Supermercado</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="categoria.css">
+    <link rel="stylesheet" href="../publico/css/categoria.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<?php include '../php/navbar.php'; ?>
+<?php include '../vista/navbar.php'; ?>
 
 <!-- Modal de Perfil -->
 <div class="modal fade" id="perfilModal" tabindex="-1" aria-labelledby="perfilModalLabel" aria-hidden="true">
@@ -21,7 +21,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
             </div>
             <div class="modal-body">
-                <form id="perfilForm" action="../php/editar_perfil.php" method="POST">
+                <form id="perfilForm" action="../modelos/editar_perfil.php" method="POST">
                     <div class="mb-3">
                         <label class="form-label"><b>Documento:</b></label>
                         <input type="text" class="form-control" value="<?= $usuario['documento'] ?>" readonly>
@@ -50,8 +50,8 @@
     </div>
 </div>
 
-<?php include '../php/agregar_categoria.php'; ?>
-<?php include '../php/footer.php'; ?>
+<?php include '../vista/agregar_categoria.php'; ?>
+<?php include '../vista/footer.php'; ?>
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

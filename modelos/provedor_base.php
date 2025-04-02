@@ -1,5 +1,5 @@
 <?php
-include '../php/conexion_be.php';
+include '../config/conexion_be.php';
 
 
 $nombre_provedor = $_POST['nombre_provedor'];
@@ -22,12 +22,12 @@ if (mysqli_num_rows($result) > 0) {
 if (!isset($_FILES['imagen_Provedor']) || $_FILES['imagen_Provedor']['error'] != 0) {
     echo '<script>
         alert("Error al subir la imagen");
-        window.location = "../bienvenida.php";
+        window.location = "../vista/bienvenida.php";
     </script>';
     exit();
 }
 
-$directorio = "../imagenes_provedores/";  
+$directorio = "../publico/imagenes_provedores/";  
 if (!is_dir($directorio)) {
     mkdir($directorio, 0777, true);  
 }
@@ -42,7 +42,7 @@ $extensiones_permitidas = ["jpg", "jpeg", "png", "gif"];
 if (!in_array($imagen_extension, $extensiones_permitidas)) {
     echo '<script>
         alert("Formato de imagen no permitido. Solo JPG, JPEG, PNG y GIF.");
-        window.location = "../index/provedor.php";
+        window.location = "../vista/provedor.php";
     </script>';
     exit();
 }
@@ -50,7 +50,7 @@ if (!in_array($imagen_extension, $extensiones_permitidas)) {
 if (!move_uploaded_file($_FILES["imagen_Provedor"]["tmp_name"], $ruta_final)) {
     echo '<script>
         alert("Error al guardar la imagen en el servidor.");
-        window.location = "../index/provedor.php";
+        window.location = "../vista/provedor.php";
     </script>';
     exit();
 }
@@ -64,7 +64,7 @@ $ejecutar = mysqli_query($conexion, $query);
 if ($ejecutar) {
     echo '<script>
         alert("Proveedor almacenado exitosamente");
-        window.location = "../index/provedor.php";
+        window.location = "../vista/provedor.php";
     </script>';
 } else {
     echo "Error en la consulta: " . mysqli_error($conexion);

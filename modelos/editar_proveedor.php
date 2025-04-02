@@ -1,5 +1,5 @@
 <?php
-include 'conexion_be.php';
+include '../config/conexion_be.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     if (!empty($_FILES['imagen_provedor']['name'])) {
         $imagen = $_FILES['imagen_provedor']['name'];
-        $ruta = "../imagenes_provedores/" . $imagen;
+        $ruta = "../publico/imagenes_provedores/" . $imagen;
         move_uploaded_file($_FILES['imagen_provedor']['tmp_name'], $ruta);
         $query = "UPDATE proveedores SET nombre_provedor='$nombre', descripcion='$descripcion', correo='$correo', contacto='$contacto', imagen_provedor='$imagen' WHERE id=$id";
     } else {
@@ -21,7 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resultado = mysqli_query($conexion, $query);
 
     if ($resultado) {
-        echo "<script>alert('Proveedor actualizado con éxito'); window.location.href='../index/provedor.php';</script>";
+        echo "<script>alert('Proveedor actualizado con éxito'); window.location.href='../vista/provedor.php';</script>";
     } else {
         echo "<script>alert('Error al actualizar proveedor'); window.history.back();</script>";
     }

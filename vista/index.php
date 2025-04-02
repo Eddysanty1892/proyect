@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Supermercado - Login y Registro</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="../publico/css/estilos.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <!-- Formulario de Login -->
         <div class="form-container" id="login-form">
             <h2>Iniciar Sesión</h2>
-            <form action="../php/login.php" method="POST">
+            <form action="../modelos/login.php" method="POST">
                 <div class="input-box">
                     <i class="fas fa-envelope"></i>
                     <input type="email" name="correo" placeholder="Correo" required>
@@ -35,7 +35,7 @@
         <!-- Formulario de Registro -->
         <div class="form-container hidden" id="register-form">
             <h2>Registrarse</h2>
-            <form action="../php/registro.php" method="POST">
+            <form action="../modelos/registro.php" method="POST">
                 <div class="input-box">
                     <i class="fas fa-id-card"></i>
                     <input type="text" name="documento" placeholder="Documento" required>

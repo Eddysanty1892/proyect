@@ -6,11 +6,11 @@ if (session_status() == PHP_SESSION_NONE) {
 
 if (!isset($_SESSION['correo'])) {
     // Si no hay sesión activa, redirige al login
-    header("Location: ../index/index.php");
+    header("Location: ../vista/index.php");
     exit();
 }
 
-include '../php/conexion_be.php'; // Conexión a la base de datos
+include '../config/conexion_be.php'; // Conexión a la base de datos
 
 // Obtener los datos del usuario desde la base de datos usando el correo guardado en la sesión
 $correo = $_SESSION['correo']; // Correo del usuario desde la sesión
@@ -22,7 +22,7 @@ if ($resultado && mysqli_num_rows($resultado) > 0) {
     $usuario = mysqli_fetch_assoc($resultado); // Almacenamos los datos en $usuario
 } else {
     // Si no se encuentra el usuario, redirigimos
-    echo '<script>alert("Usuario no encontrado."); window.location.href="../index/index.php";</script>';
+    echo '<script>alert("Usuario no encontrado."); window.location.href="../vista/index.php";</script>';
     exit();
 }
 // Verifica si la sesión ya está iniciada antes de llamar a session_start()
@@ -37,17 +37,17 @@ if (!isset($_SESSION['correo'])) {
 
 $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
 ?>
-<link rel="stylesheet" href="../css/nav.css">
+<link rel="stylesheet" href="../publico/css/nav.css">
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="../index/bienvenida.php">Supermercado</a>
+        <a class="navbar-brand" href="../vista/bienvenida.php">Supermercado</a>
 
         <div class="dropdown">
             <a class="navbar-brand dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
                 Producto
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../index/producto.php">Ver Producto</a></li>
+                <li><a class="dropdown-item" href="../vista/producto.php">Ver Producto</a></li>
                 <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
                     <li>
                         <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProductoModal">Crear Producto</a>
@@ -61,7 +61,7 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
                 Categoría
             </a>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="../index/categoria.php">Ver Categorías</a></li>
+                <li><a class="dropdown-item" href="../vista/categoria.php">Ver Categorías</a></li>
                 <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
                     <li>
                         <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearCategoriaModal">Crear Categoría</a>
@@ -76,7 +76,7 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
                     Proveedor
                 </a>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="../index/provedor.php">Ver Proveedores</a></li>
+                    <li><a class="dropdown-item" href="../vista/provedor.php">Ver Proveedores</a></li>
                     <?php if ($rol === 'Administrador' || $rol === 'Vendedor'): ?>
                         <li><a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#crearProvedorModal">Crear Proveedor</a></li>
                     <?php endif; ?>
@@ -99,7 +99,7 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
                     <button class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#perfilModal">Ver Perfil</button>
                 </li>
                 <li class="nav-item">
-                    <a href="../php/logout.php" class="btn btn-danger">Cerrar Sesión</a>
+                    <a href="../modelos/logout.php" class="btn btn-danger">Cerrar Sesión</a>
                 </li>
             </ul>
         </div>
@@ -115,7 +115,7 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../php/provedor_base.php" method="POST" enctype="multipart/form-data">
+          <form action="../modelos/provedor_base.php" method="POST" enctype="multipart/form-data">
             <div class="modal-footer">
               <input type="text" class="form-control mb-4" name="nombre_provedor" placeholder="Nombre del proveedor" required>
               <input type="text" style="height: 90px;" class="form-control mb-4" name="descripcion" placeholder="Descripción" required>
@@ -144,7 +144,7 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="../php/categoria_base.php" method="POST" enctype="multipart/form-data">
+          <form action="../modelos/categoria_base.php" method="POST" enctype="multipart/form-data">
             <div class="modal-footer">
               <input type="text" class="form-control mb-4" name="nombre_categoria" placeholder="Nombre de categoría" required>
               <input type="text" style="height: 90px;" class="form-control mb-4" name="tipo" placeholder="Tipo" required>
@@ -172,7 +172,7 @@ $rol = $_SESSION['rol'];  // Obtén el rol desde la sesión
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="../php/producto_be.php" method="POST" enctype="multipart/form-data">
+                <form action="../modelos/producto_be.php" method="POST" enctype="multipart/form-data">
                     <div class="mb-3">
                         
                         <input type="text" class="form-control" name="nombre_producto" placeholder="Nombre del producto" required>
